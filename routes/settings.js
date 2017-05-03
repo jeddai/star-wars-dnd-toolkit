@@ -74,14 +74,9 @@ router.post('/add-planet', function(req, res, next) {
 router.post('/add-planet-many', function(req, res, next) {
   if(req.body.pass !== schema.options.pass) return res.status(500).send('Not authorized');
   var planets = req.body.planets;
-  planets.forEach(function(p, i) {
-    var newPlanet = new Planet(req.body.planets);
-    newPlanet.active = false;
-    newPlanet = new Planet(newPlanet);
-    newPlanet.save(function(err, planet) {
-      if(err) return res.status(500).send(err);
-      if(i === planets.length - 1) return res.send('OK');
-    });
+  Planet.collection.insert(planets, function(err, planets) {
+    if(err) return res.status(500).send(err);
+    return res.send('OK');
   });
 });
 
