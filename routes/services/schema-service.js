@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
 var schema_url = 'mongodb://localhost:27017/ddtoolkit';
+var options = {
+  user: '',
+  pass: ''
+};
 if (!mongoose.connection.db) {
-  mongoose.connect(schema_url, function (err) {
+  mongoose.connect(schema_url, options, function (err) {
     if (err) {
       console.log(JSON.stringify(err));
     } else {
@@ -103,5 +107,6 @@ var Scene = mongoose.model('Scene', sceneSchema);
 
 module.exports = {
   Planet: Planet,
-  Scene: Scene
+  Scene: Scene,
+  options: options
 };
