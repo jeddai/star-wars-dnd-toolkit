@@ -1,0 +1,7 @@
+md-content.layout-padding.flex-grow(ng-cloak)
+    h1 Admin Settings and Tools
+    md-nav-bar(md-selected-nav-item="settings.currentNavItem"
+        nav-bar-aria-label="navigation links")
+        md-nav-item(md-nav-click="settings.goTo('Settings.Planets')" name="planets") Planets
+        md-nav-item(md-nav-click="settings.goTo('Settings.Combat')" name="combat") Combat
+    ui-view.layout-row

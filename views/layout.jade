@@ -1,0 +1,74 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+        link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
+        link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
+        link(rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png")
+        link(rel="manifest" href="/manifest.json")
+        link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5")
+        meta(name="theme-color" content="#ffffff")
+
+        link(href="/bower/angular-material/angular-material.css" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Rationale" rel="stylesheet")
+        link(rel='stylesheet' type='text/css' href='/bower/font-awesome/css/font-awesome.css')
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans")
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+
+        script(src='/bower/jquery/dist/jquery.min.js')
+        script(src='/bower/angular/angular.min.js')
+        script(src='/bower/angular-animate/angular-animate.min.js')
+        script(src='/bower/angular-touch/angular-touch.min.js')
+        script(src='/bower/angular-aria/angular-aria.min.js')
+        script(src='/bower/angular-material/angular-material.min.js')
+        script(src='/bower/angular-ui-router/release/angular-ui-router.min.js')
+
+        script(src='https://d3js.org/d3.v4.min.js')
+
+        script(src='/javascripts/helpers/colors-helper.js')
+        script(src='/javascripts/helpers/ShortestPathCalculator.js')
+        script(src='/javascripts/helpers/ShortestPathUtils.js')
+        script(src='/javascripts/helpers/pdf.js')
+        //script(src='/javascripts/helpers/pdf.worker.js')
+
+        script(src='/javascripts/star-wars.js')
+        script(src='/javascripts/star-wars-routes.js')
+        script(src='/javascripts/services/auth-service.js')
+        script(src='/javascripts/controllers/nav-controller.js')
+        script(src='/javascripts/controllers/index-controller.js')
+        script(src='/javascripts/controllers/map-controller.js')
+        script(src='/javascripts/controllers/phb-controller.js')
+        script(src='/javascripts/controllers/settings-controller.js')
+        script(src='/javascripts/controllers/login-controller.js')
+    body(ng-app='star-wars' ng-controller="NavController as nav")
+        md-toolbar.hide-gt-md
+            .md-toolbar-tools
+                md-button.md-icon-button
+                    i.fa.fa-reorder.fa-2x(ng-click="nav.toggleNav()" aria-label="Menu")
+        div.layout-column.layout-fill
+            section.flex.layout-row.layout-wrap
+                md-sidenav.md-sidenav-left(md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4")
+                    md-toolbar
+                        h1.md-toolbar-tools Menu
+                    md-content
+                        md-list.flex
+                            md-list-item.secondary-button-padding(ng-click="nav.go('PHB')")
+                                p Player's Supplement
+                                i.fa.fa-rebel
+                            md-list-item.secondary-button-padding(ng-click="nav.go('Map')")
+                                p Map
+                                i.fa.fa-map
+                            md-list-item.secondary-button-padding(ng-click="nav.go('Vehicles')")
+                                p Vehicles
+                                i.fa.fa-space-shuttle
+                            md-list-item.secondary-button-padding(ng-click="nav.go('WA')")
+                                p Weapons & Armor
+                                i.fa.fa-shield
+                            md-list-item.secondary-button-padding(ng-click="nav.go('Settings')")
+                                p Admin
+                                i.fa.fa-cog
+                ui-view.flex.layout-row.layout-wrap
+        block content

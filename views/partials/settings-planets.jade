@@ -1,0 +1,81 @@
+md-content.flex.flex-30
+    md-card
+        md-card-content
+            md-list
+                md-list-item(ng-repeat="planet in settings.planets")
+                    p {{ planet.name }}
+                    md-checkbox.md-secondary(ng-model="planet.active" ng-change="settings.updatePlanet(planet)")
+                    md-icon.md-secondary(ng-click="settings.edit(planet)" aria-label="edit") build
+                    md-icon.md-secondary(ng-click="settings.destroyPlanet(planet)" aria-label="destroy") clear
+md-content.flex.flex-70
+    md-card
+        md-card-content
+            md-button.md-primary(ng-click="settings.clearForm()") Empty Form
+            h2.md-title {{ settings.selected.name }}
+            .layout-row.layout-xs-column
+                md-input-container.md-block.flex
+                    label Planet Name
+                    input(ng-model="settings.selected.name")
+                md-input-container.md-block.flex(ng-if="settings.selected.name")
+                    md-select(ng-model='settings.selected.region' aria-label="Region" placeholder="Region")
+                        md-option(value="Colonies") Colonies
+                        md-option(value="Core Worlds") Core Worlds
+                        md-option(value="Deep Core") Deep Core
+                        md-option(value="Inner Rim") Inner Rim
+                        md-option(value="Mid Rim") Mid Rim
+                        md-option(value="Outer Rim Territories") Outer Rim Territories
+            div(ng-if="settings.selected.name")
+                .layout-row.layout-xs-column
+                    md-input-container.md-block.flex
+                        label Sector
+                        input(ng-model="settings.selected.sector")
+                    md-input-container.md-block.flex
+                        label System
+                        input(ng-model="settings.selected.system")
+                .layout-row.layout-xs-column
+                    md-input-container.md-block.flex
+                        label Capital
+                        input(ng-model="settings.selected.capital")
+                    md-input-container.md-block.flex
+                        md-select(ng-model='settings.selected.climate' aria-label="Climate" placeholder="Climate")
+                            md-option(ng-value="c" ng-repeat="c in settings.climates") {{ c }}
+                md-input-container.md-block.flex.flex-50
+                    label Coordinates
+                    input(ng-model="settings.selected.coordinates")
+            .layout-row.layout-xs-column(ng-if="!!settings.selected.name")
+                .flex
+                    p Hyperspace Links
+                    .layout-row(ng-repeat="link in settings.selected.hyperspace track by $index")
+                        md-button.md-icon-button(ng-click="settings.selected.hyperspace.splice($index, 1)")
+                            md-icon.md-secondary.md-icon-button clear
+                        md-input-container.md-block.flex
+                            label Planet
+                            input.flex(ng-model="settings.selected.hyperspace[$index].planet")
+                        md-input-container.md-block.flex
+                            label Distance
+                            input.flex(ng-model="settings.selected.hyperspace[$index].distance" type="number")
+                    md-button.md-secondary.flex(ng-click="settings.selected.hyperspace.push({})") New Hyperspace Link
+                        md-icon.md-secondary.md-icon-button add
+                .flex
+                    p Inhabitants
+                    .layout-row(ng-repeat="inhabitant in settings.selected.inhabitants track by $index")
+                        md-button.md-icon-button(ng-click="settings.selected.inhabitants.splice($index, 1)")
+                            md-icon.md-secondary.md-icon-button clear
+                        md-input-container.md-block.flex
+                            label Inhabitant
+                            input.flex(ng-model="settings.selected.inhabitants[$index]")
+                    md-button.md-secondary.flex(ng-click="settings.selected.inhabitants.push('')") New Inhabitant
+                        md-icon.md-secondary.md-icon-button add
+                .flex
+                    p Alignment
+                    .layout-row(ng-repeat="alignment in settings.selected.alignment track by $index")
+                        md-button.md-icon-button(ng-click="settings.selected.alignment.splice($index, 1)")
+                            md-icon.md-secondary.md-icon-button clear
+                        md-input-container.md-block.flex
+                            label Alignment
+                            input.flex(ng-model="settings.selected.alignment[$index]")
+                    md-button.md-secondary.flex(ng-click="settings.selected.alignment.push('')") New Alignment
+                        md-icon.md-secondary.md-icon-button add
+            md-button.md-secondary.md-raised(ng-click="settings.newPlanet()" ng-disabled="!settings.selected.name") Add Planet
+                md-icon.md-secondary add
+            md-button.md-primary.md-raised(ng-click="settings.updatePlanet(settings.selected)" ng-disabled="!settings.selected.name") Save

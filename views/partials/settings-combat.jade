@@ -1,0 +1,88 @@
+.layout-column.flex
+    md-toolbar.md-menu-toolbar
+        h2.md-toolbar-tools Combat Menu
+        md-menu-bar
+            md-menu
+                button(ng-click="$mdMenu.open()") Scenes
+                md-menu-content
+                    md-menu-item
+                        md-button(ng-click="settings.scene = { name: '', description: '', combatants: [] }") New Scene
+                            span.md-alt-text
+                                md-icon add
+                    md-menu-divider
+                    md-menu-item(ng-if="settings.scenes.length === 0")
+                        p No scenes, you should make one!
+                    md-menu-item(ng-repeat="scene in settings.scenes")
+                        md-button(ng-click="settings.getScene(scene.name)") {{ scene.name }}
+            md-menu(ng-if="settings.scene")
+                button(ng-click="$mdMenu.open()") Scene
+                md-menu-content
+                    md-menu-item
+                        md-button(ng-click="settings.updateScene(settings.scene)") Save
+                            span.md-alt-text
+                                md-icon done
+                    md-menu-item
+                        md-button(ng-click="settings.getScene(settings.scene.name)") Reload Scene
+                            span.md-alt-text
+                                md-icon autorenew
+                    md-menu-item
+                        md-button(ng-click="settings.destroyScene(settings.scene)") Delete
+                            span.md-alt-text
+                                md-icon clear
+            md-menu(ng-if="settings.scene")
+                button(ng-click="$mdMenu.open()") Combatants
+                md-menu-content
+                    md-menu-item
+                        md-button(ng-click="settings.scene.combatants.push({ initiative: 0 })") New Combatant
+                            span.md-alt-text
+                                md-icon add
+                    md-menu-item
+                        md-button(ng-click="settings.next()") Next Fighter
+                            span.md-alt-text
+                                md-icon chevron_right
+    md-content.layout-row(ng-if="settings.scene !== null")
+        md-card.flex-30
+            md-card-title
+                md-card-title-text
+                    span.md-headline {{ settings.scene.name || 'Unnamed Scene' }}
+            md-card-content
+                md-input-container.md-block.flex
+                    label Scene Name
+                    input(ng-model="settings.scene.name")
+                md-input-container.md-block.flex
+                    label Scene Description
+                    textarea(ng-model="settings.scene.description")
+                md-list
+                    md-list-item(ng-repeat="combatant in settings.scene.combatants | orderBy: '-initiative'")
+                        p {{ combatant.name || 'Unnamed Combatant' }}
+                        md-icon.md-primary(ng-if="settings.activeCombatant === $index") bookmark
+                        md-icon.md-secondary(ng-click="settings.selected = combatant" aria-label="edit") build
+                        md-icon.md-secondary(ng-click="settings.destroyCombatant($index)" aria-label="destroy") clear
+        md-card.flex-70(ng-if="!!settings.selected")
+            md-card-title
+                md-card-title-text
+                    span.md-headline {{ settings.selected.name || 'Unnamed Combatant' }}
+            md-card-content
+                .layout-row
+                    md-input-container.md-block.flex
+                        label Name
+                        input(ng-model="settings.selected.name")
+                    md-input-container.md-block.flex
+                        md-select(ng-model='settings.selected.type' aria-label="type" placeholder="Combatant Type")
+                            md-option(value="Non-Player Character") Non-Player Character
+                            md-option(value="Player Character") Player Character
+                .layout-row
+                    md-input-container.md-block.flex
+                        label HP
+                        input(ng-model="settings.selected.hp" type="number")
+                    md-input-container.md-block.flex
+                        label SP
+                        input(ng-model="settings.selected.sp" type="number")
+                    md-input-container.md-block.flex
+                        label Initiative
+                        input(ng-model="settings.selected.initiative" type="number")
+                .layout-row.flex-50
+                    md-input-container.md-block.flex
+                        label Lower HP
+                        input(ng-model="settings.lowerHP" type="number")
+                    md-button.flex(ng-click="settings.doDamage()") Lower HP

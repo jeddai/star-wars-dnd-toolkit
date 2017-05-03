@@ -1,0 +1,7 @@
+{
+  "nodes":[
+    { "id":"0", "name":"Alderaan", "terrain":"grass", "capital":"Aldera", "region":"Core Worlds" },
+    { "id":"1", "name":"Bespin", "terrain":"grass", "capital":"Aldera", "region":"Core Worlds" }
+  ],
+  "links":[]
+}

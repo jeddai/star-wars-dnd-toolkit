@@ -1,0 +1,78 @@
+body {
+  font: 18px "Rationale", sans-serif;
+  color: #e00;
+  background-color: #fff;
+}
+
+button, select, html, textarea, input {
+  font-family: Roboto, "Rationale", sans-serif;
+}
+
+a {
+  color: #e00;
+}
+
+a:hover {
+  color: #c00;
+}
+
+a.thumbnail:hover {
+  border-color: #c00;
+}
+
+div>h1,
+div>h2,
+div>h3,
+div>h4,
+div>h5 {
+  color: #e00;
+  text-shadow: 0.5px 0.5px #b00;
+}
+
+.links line {
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+@media(max-width: 1280px) {
+  .mobile-only {
+    display: inherit;
+  }
+}
+
+@media(min-width: 1280px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+.legend>ul>li {
+  text-align: left;
+  text-shadow: 0.25px 0.25px #000;
+}
+
+a.no-highlight {
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.scroll {
+  overflow: scroll;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.dialog-large {
+  min-height: 500px;
+  min-width: 500px;
+}
