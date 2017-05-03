@@ -47,16 +47,17 @@ function createLinks(nodes) {
 
 function findAllMatching(links, nodes, n) {
   var matching = [];
-  n.hyperspace.forEach(function(hyp) {
-    nodes.forEach(function(node) {
-      if (node.name === hyp.planet &&
-          n.name != node.name &&
-          !containsDuplicate(links, n, node)) {
-        node.distance = hyp.distance;
-        matching.push(node);
-      }
+  if(typeof n.hyperspace === 'object')
+    n.hyperspace.forEach(function(hyp) {
+      nodes.forEach(function(node) {
+        if (node.name === hyp.planet &&
+            n.name != node.name &&
+            !containsDuplicate(links, n, node)) {
+          node.distance = hyp.distance;
+          matching.push(node);
+        }
+      });
     });
-  });
   return matching;
 }
 

@@ -11,13 +11,13 @@
         width = parseInt(svg.attr('width')),
         height = parseInt(svg.attr('height')),
         aspect = width / height,
-        transform = d3.zoomIdentity,
-        sp = null;
+        transform = d3.zoomIdentity;
 
     vm.data = null;
     vm.groupings = ['hyperspace'];
     vm.groupBy = 'climate';
-    vm.safe = false;
+    vm.alignment = 'Republic';
+    vm.safe = 'false';
     vm.getNewData = getNewData;
     vm.reloadGraph = forceDirectedGraph;
     vm.getDirections = getDirections;
@@ -35,14 +35,12 @@
           return !p.known;
         });
         vm.data = data;
-        sp = new ShortestPathCalculator(data.nodes, data.links);
         forceDirectedGraph(data);
       });
     }
 
     function getNodes(query) {
-      var nodes = vm.data.nodes;
-      return nodes.filter(function(p) {
+      return vm.data.nodes.filter(function(p) {
         return p.name.toLowerCase().includes(query);
       });
     }
@@ -111,6 +109,7 @@
         if(vm.groupBy === 'climate') {
           return climateColors[p.climate];
         } else if(vm.groupBy === 'alignment') {
+          if(typeof p.alignment !== 'object') return alignmentColors['None'];
           var mainAlignment = p.alignment[0];
           if(mainAlignment)
             return alignmentColors[mainAlignment];
@@ -301,7 +300,7 @@
     }
 
     function getDirections(p1, p2) {
-      // var path = shortestPath(vm.data, p1, p2);
+      var sp = new ShortestPathCalculator(vm.data.nodes, vm.data.links, vm.safe === 'true', vm.alignment);
       if(!p1 || !p2) {
         showToast('Please enter valid planet names');
         return;
@@ -309,6 +308,7 @@
       d3.selectAll("line").attr('stroke-width', 2)
       .attr('stroke', baseLineColor);
       path = sp.findRoute(p1, p2);
+      path.distance = findDistance(path.path);
       if(path.mesg === 'OK') {
         vm.path = path;
         path = path.path;
@@ -327,6 +327,19 @@
         // return line.source.name === p1 || line.target.name === p1 || line.source.name === p2 || line.target.name === p2;
       })
       .attr('stroke', mapLineColor);
+    }
+
+    function findDistance(path) {
+      var dist = 0;
+      if(typeof path === 'object' && !!path)
+        path.forEach(function(p) {
+          var arr = angular.copy(vm.data.links);
+          arr = arr.filter(function(link) {
+            return link.id.includes(p.source) && link.id.includes(p.target);
+          });
+          dist += arr[0].distance;
+        });
+      return dist;
     }
   }
 })();

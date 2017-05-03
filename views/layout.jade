@@ -46,8 +46,8 @@ html
     body(ng-app='star-wars' ng-controller="NavController as nav")
         md-toolbar.hide-gt-md
             .md-toolbar-tools
-                md-button.md-icon-button
-                    i.fa.fa-reorder.fa-2x(ng-click="nav.toggleNav()" aria-label="Menu")
+                md-button.md-icon-button(ng-click="nav.toggleNav()" aria-label="Menu")
+                    md-icon menu
         div.layout-column.layout-fill
             section.flex.layout-row.layout-wrap
                 md-sidenav.md-sidenav-left(md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4")
@@ -67,7 +67,7 @@ html
                             md-list-item.secondary-button-padding(ng-click="nav.go('WA')")
                                 p Weapons & Armor
                                 i.fa.fa-shield
-                            md-list-item.secondary-button-padding(ng-click="nav.go('Settings')")
+                            md-list-item.secondary-button-padding(ng-click="nav.go('Settings.Planets')")
                                 p Admin
                                 i.fa.fa-cog
                 ui-view.flex.layout-row.layout-wrap

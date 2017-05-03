@@ -1,7 +1,9 @@
-var ShortestPathCalculator = function(nodes, paths) {
+var ShortestPathCalculator = function(nodes, paths, safe, alignment) {
 
   this.nodes = nodes; // nodes => [ { index: 0, value: 'a', r: 20 }, ... ]
   this.paths = paths; // paths => [ { source: 0, target: 1, distance: 150 }, ... ]
+  this.safe = safe;
+  this.alignment = alignment;
   this.distances = {}; // [ [ x, 100, 150 ], [ 100, x, 10] ]
   this.graph = {};
 
@@ -65,6 +67,30 @@ ShortestPathCalculator.prototype.populateDistances = function() {
     var s = this.paths[i].source.name;
     var t = this.paths[i].target.name;
     var d = parseInt(this.paths[i].distance);
+    if(!!this.safe) {
+      var alignment = this.alignment;
+      this.paths[i].target.alignment.forEach(function(targetAlignment) {
+        if(targetAlignment === 'None') return;
+        if(alignment === 'Republic') {
+          if(targetAlignment === 'Sith') d += 300;
+          else if(targetAlignment === 'Mandalorian') d += 150;
+          else if(targetAlignment === 'Hutt') d += 50;
+          else if(targetAlignment === 'Contested') d += 500;
+        }
+        else if(alignment === 'Sith') {
+          if(targetAlignment === 'Republic') d += 300;
+          else if(targetAlignment === 'Mandalorian') d += 150;
+          else if(targetAlignment === 'Hutt') d += 50;
+          else if(targetAlignment === 'Contested') d += 500;
+        }
+        else if(alignment === 'Mandalorian') {
+          if(targetAlignment === 'Republic') d += 300;
+          else if(targetAlignment === 'Sith') d += 300;
+          else if(targetAlignment === 'Hutt') d += 50;
+          else if(targetAlignment === 'Contested') d += 500;
+        }
+      });
+    }
 
     this.distances[s][t] = d;
     this.distances[t][s] = d;

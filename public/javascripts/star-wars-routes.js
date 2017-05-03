@@ -53,6 +53,6 @@
       url: '/login'
     });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/phb');
   });
 })();

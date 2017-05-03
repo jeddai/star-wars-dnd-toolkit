@@ -61,16 +61,6 @@ router.get('/planets', function(req, res, next) {
   });
 });
 
-router.post('/add-planet', function(req, res, next) {
-  var newPlanet = req.body;
-  newPlanet.active = false;
-  newPlanet = new Planet(newPlanet);
-  newPlanet.save(function(err, p) {
-    if(err) return res.status(500).send(err);
-    return res.send(p);
-  });
-});
-
 router.post('/add-planet-many', function(req, res, next) {
   if(req.body.pass !== schema.options.pass) return res.status(500).send('Not authorized');
   var planets = req.body.planets;
@@ -81,10 +71,25 @@ router.post('/add-planet-many', function(req, res, next) {
 });
 
 router.post('/update-planet', function(req, res, next) {
-  Planet.findOneAndUpdate({ "name":req.body.name }, req.body, function(err, p) {
+  Planet.findOne({ "name":req.body.name }, function(err, p) {
     if(err) return res.status(500).send(err);
-    return res.send(req.body);
+    if(!p) {
+      var newPlanet = req.body;
+      newPlanet.active = false;
+      newPlanet = new Planet(newPlanet);
+      newPlanet.save(function(err, p) {
+        if(err) return res.status(500).send(err);
+        return res.send(p);
+      });
+    }
+    else  {
+      Planet.findOneAndUpdate({ "name":req.body.name }, req.body, function(err, p) {
+        if(err) return res.status(500).send(err);
+        return res.send(req.body);
+      });
+    }
   });
+
 });
 
 router.post('/delete-planet', function(req, res, next) {

@@ -1,13 +1,17 @@
-md-content.flex.flex-30
+.flex.flex-gt-sm-30
     md-card
         md-card-content
             md-list
+                md-list-item
+                    md-input-container.flex
+                        label Filter
+                        input(ng-model="settings.filter" ng-change="settings.filterPlanets()")
                 md-list-item(ng-repeat="planet in settings.planets")
                     p {{ planet.name }}
                     md-checkbox.md-secondary(ng-model="planet.active" ng-change="settings.updatePlanet(planet)")
                     md-icon.md-secondary(ng-click="settings.edit(planet)" aria-label="edit") build
                     md-icon.md-secondary(ng-click="settings.destroyPlanet(planet)" aria-label="destroy") clear
-md-content.flex.flex-70
+.flex.flex-gt-sm-70
     md-card
         md-card-content
             md-button.md-primary(ng-click="settings.clearForm()") Empty Form
@@ -21,6 +25,7 @@ md-content.flex.flex-70
                         md-option(value="Colonies") Colonies
                         md-option(value="Core Worlds") Core Worlds
                         md-option(value="Deep Core") Deep Core
+                        md-option(value="Expansion Region") Expansion Region
                         md-option(value="Inner Rim") Inner Rim
                         md-option(value="Mid Rim") Mid Rim
                         md-option(value="Outer Rim Territories") Outer Rim Territories
@@ -43,7 +48,7 @@ md-content.flex.flex-70
                     label Coordinates
                     input(ng-model="settings.selected.coordinates")
             .layout-row.layout-xs-column(ng-if="!!settings.selected.name")
-                .flex
+                .flex.flex-40
                     p Hyperspace Links
                     .layout-row(ng-repeat="link in settings.selected.hyperspace track by $index")
                         md-button.md-icon-button(ng-click="settings.selected.hyperspace.splice($index, 1)")
@@ -54,9 +59,9 @@ md-content.flex.flex-70
                         md-input-container.md-block.flex
                             label Distance
                             input.flex(ng-model="settings.selected.hyperspace[$index].distance" type="number")
-                    md-button.md-secondary.flex(ng-click="settings.selected.hyperspace.push({})") New Hyperspace Link
+                    md-button.md-secondary.flex(ng-click="settings.pushEmpty('hyperspace')") New Hyperspace Link
                         md-icon.md-secondary.md-icon-button add
-                .flex
+                .flex.flex-30
                     p Inhabitants
                     .layout-row(ng-repeat="inhabitant in settings.selected.inhabitants track by $index")
                         md-button.md-icon-button(ng-click="settings.selected.inhabitants.splice($index, 1)")
@@ -64,9 +69,9 @@ md-content.flex.flex-70
                         md-input-container.md-block.flex
                             label Inhabitant
                             input.flex(ng-model="settings.selected.inhabitants[$index]")
-                    md-button.md-secondary.flex(ng-click="settings.selected.inhabitants.push('')") New Inhabitant
+                    md-button.md-secondary.flex(ng-click="settings.pushEmpty('inhabitants')") New Inhabitant
                         md-icon.md-secondary.md-icon-button add
-                .flex
+                .flex.flex-30
                     p Alignment
                     .layout-row(ng-repeat="alignment in settings.selected.alignment track by $index")
                         md-button.md-icon-button(ng-click="settings.selected.alignment.splice($index, 1)")
@@ -74,8 +79,6 @@ md-content.flex.flex-70
                         md-input-container.md-block.flex
                             label Alignment
                             input.flex(ng-model="settings.selected.alignment[$index]")
-                    md-button.md-secondary.flex(ng-click="settings.selected.alignment.push('')") New Alignment
+                    md-button.md-secondary.flex(ng-click="settings.pushEmpty('alignment')") New Alignment
                         md-icon.md-secondary.md-icon-button add
-            md-button.md-secondary.md-raised(ng-click="settings.newPlanet()" ng-disabled="!settings.selected.name") Add Planet
-                md-icon.md-secondary add
             md-button.md-primary.md-raised(ng-click="settings.updatePlanet(settings.selected)" ng-disabled="!settings.selected.name") Save

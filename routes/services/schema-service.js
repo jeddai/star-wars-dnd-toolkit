@@ -100,6 +100,14 @@ var sceneSchema = new Schema({
     initiative: {
       type: Number,
       required: false
+    },
+    attackBonus: {
+      type: Number,
+      required: false
+    },
+    damageDie: {
+      type: String,
+      required: false
     }
   }]
 });
