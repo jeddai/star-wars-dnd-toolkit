@@ -54,7 +54,7 @@ router.all('*', function (req, res, next) {
  * Planets
  */
 router.get('/planets', function(req, res, next) {
-  Planet.find({}, function(err, planets) {
+  Planet.find({}, { '_id':0, '__v':0 }, function(err, planets) {
     if(err) return res.status(500).send('Error Getting Planets');
 
     return res.send(planets);

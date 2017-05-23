@@ -7,7 +7,7 @@ var ShortestPathCalculator = function(nodes, paths, safe, alignment) {
   this.distances = {}; // [ [ x, 100, 150 ], [ 100, x, 10] ]
   this.graph = {};
 
-  var maxNodes = 50;
+  var maxNodes = 500;
   var minNodes = 3;
 
   if(!d3) throw new ShortestPathCalculator.SpcError(10, 'D3 library not found');
@@ -75,18 +75,28 @@ ShortestPathCalculator.prototype.populateDistances = function() {
           if(targetAlignment === 'Sith') d += 300;
           else if(targetAlignment === 'Mandalorian') d += 150;
           else if(targetAlignment === 'Hutt') d += 50;
+          else if(targetAlignment === 'Chiss') d += 0;
           else if(targetAlignment === 'Contested') d += 500;
         }
         else if(alignment === 'Sith') {
           if(targetAlignment === 'Republic') d += 300;
           else if(targetAlignment === 'Mandalorian') d += 150;
           else if(targetAlignment === 'Hutt') d += 50;
+          else if(targetAlignment === 'Chiss') d += 300;
           else if(targetAlignment === 'Contested') d += 500;
         }
         else if(alignment === 'Mandalorian') {
           if(targetAlignment === 'Republic') d += 300;
           else if(targetAlignment === 'Sith') d += 300;
+          else if(targetAlignment === 'Chiss') d += 300;
           else if(targetAlignment === 'Hutt') d += 50;
+          else if(targetAlignment === 'Contested') d += 500;
+        }
+        else if(alignment === 'Chiss') {
+          if(targetAlignment === 'Republic') d += 0;
+          else if(targetAlignment === 'Sith') d += 300;
+          else if(targetAlignment === 'Hutt') d += 300;
+          else if(targetAlignment === 'Mandalorian') d += 300;
           else if(targetAlignment === 'Contested') d += 500;
         }
       });

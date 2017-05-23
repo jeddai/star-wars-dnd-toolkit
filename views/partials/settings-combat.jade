@@ -29,17 +29,6 @@
                         md-button(ng-click="settings.destroyScene(settings.scene)") Delete
                             span.md-alt-text
                                 md-icon clear
-            md-menu(ng-if="settings.scene")
-                button(ng-click="$mdMenu.open()") Combatants
-                md-menu-content
-                    md-menu-item
-                        md-button(ng-click="settings.scene.combatants.push({ initiative: 0 })") New Combatant
-                            span.md-alt-text
-                                md-icon add
-                    md-menu-item
-                        md-button(ng-click="settings.next()") Next Fighter
-                            span.md-alt-text
-                                md-icon chevron_right
 .flex.flex-gt-sm-30(ng-if="!!settings.scene")
     md-card
         md-card-title
@@ -52,12 +41,18 @@
             md-input-container.md-block.flex
                 label Scene Description
                 textarea(ng-model="settings.scene.description")
+            md-button.md-primary(ng-click="settings.scene.combatants.push({ initiative: 0 })") New Combatant
+                span.md-alt-text
+                    md-icon add
+            md-button.md-secondary(ng-click="settings.next()") Next Fighter
+                span.md-alt-text
+                    md-icon chevron_right
             md-list
                 md-list-item(ng-repeat="combatant in settings.scene.combatants | orderBy: '-initiative'")
                     p {{ combatant.name || 'Unnamed Combatant' }}
                     md-icon.md-primary(ng-if="settings.activeCombatant === $index") bookmark
                     md-icon.md-secondary(ng-click="settings.selected = combatant" aria-label="edit") build
-                    md-icon.md-secondary(ng-click="settings.destroyCombatant($index)" aria-label="destroy") clear
+                    md-icon.md-secondary(ng-click="settings.destroyCombatant(combatant)" aria-label="destroy") clear
 .flex.flex-gt-sm-70(ng-if="!!settings.scene && !!settings.selected")
     md-card
         md-card-title

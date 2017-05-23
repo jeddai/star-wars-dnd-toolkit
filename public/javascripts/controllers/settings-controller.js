@@ -176,7 +176,11 @@
       });
     }
 
-    function destroyCombatant(index) {
+    function destroyCombatant(combatant) {
+      var index = 0;
+      for(index = 0; index < vm.scene.combatants.length; index++) {
+        if(vm.scene.combatants[index].name === combatant.name) break;
+      }
       confirmDelete(vm.scene.combatants[index].name, function() {
         vm.scene.combatants.splice(index, 1);
         vm.selected = null;

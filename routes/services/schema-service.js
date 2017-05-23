@@ -26,6 +26,7 @@ var planetSchema = new Schema({
   },
   region: {
     type: String,
+    enum: ['Colonies', 'Core Worlds', 'Deep Core', 'Expansion Region', 'Inner Rim', 'Mid Rim', 'Outer Rim Territories', 'Unknown Regions'],
     required: false
   },
   sector: {
@@ -112,6 +113,29 @@ var sceneSchema = new Schema({
   }]
 });
 var Scene = mongoose.model('Scene', sceneSchema);
+
+var vehicleSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  hp: {
+    type: Number,
+    required: false
+  },
+  sp: {
+    type: Number,
+    required: false
+  },
+  speed: {
+    type: Number,
+    required: false
+  },
+  damageDie: {
+    type: String,
+    required: false
+  }
+});
 
 module.exports = {
   Planet: Planet,

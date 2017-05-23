@@ -115,6 +115,8 @@
             return alignmentColors[mainAlignment];
           else
             return alignmentColors['None'];
+        } else if(vm.groupBy === 'region') {
+          return regionColors[p.region];
         }
       })
       .on('mouseover', highlight)

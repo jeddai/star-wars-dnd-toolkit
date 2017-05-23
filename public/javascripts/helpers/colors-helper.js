@@ -1,6 +1,3 @@
-var climates = [];
-var alignments = [];
-
 var climateColors = {
   Arid: '#fd8',
   Asteroid: '#777',
@@ -20,19 +17,41 @@ var climateColors = {
   Water: '#00f'
 };
 
+var alignmentColors = {
+  'Black Sun': '#333',
+  'Chiss Ascendancy': '#808',
+  Contested: '#000',
+  // 'Eternal Empire': '#dd0',
+  Jedi: '#0b0',
+  'Mando\'ade': '#00d',
+  Republic: '#f70',
+  Sith: '#d00',
+  None: '#bbb'
+};
+
+var regionColors = {
+  'Colonies': '#666',
+  'Core Worlds': '#ccc',
+  'Deep Core': '#eee',
+  'Expansion Region': '#444',
+  'Inner Rim': '#aaa',
+  'Mid Rim': '#888',
+  'Outer Rim Territories': '#222',
+  'Unknown Regions': '#000'
+};
+
+var climates = [];
+var alignments = [];
+var regions = [];
+
 for(var c in climateColors) {
   climates.push(c);
 }
 
-var alignmentColors = {
-  Contested: '#dd0',
-  Hutt: '#fd8',
-  Mandalorian: '#00d',
-  Republic: '#d00',
-  Sith: '#333',
-  None: '#bbb'
-};
-
 for(var a in alignmentColors) {
   alignments.push(a);
+}
+
+for(var r in regionColors) {
+  regions.push(r);
 }
