@@ -32,6 +32,7 @@
     vm.updateScene = updateScene;
     vm.destroyScene = destroyScene;
     vm.destroyCombatant = destroyCombatant;
+    vm.newCombatant = newCombatant();
 
     getPlanets();
     getScenes();
@@ -47,7 +48,7 @@
           $mdToast.simple()
           .textContent(text)
           .position('right top')
-          .hideDelay(3000)
+          .hideDelay(2000)
       );
     }
 
@@ -159,7 +160,6 @@
       $http.post('/settings/update-scene', vm.scene)
       .then(function(res) {
         vm.scene = res.data;
-        vm.selected = null;
         getScenes();
         toast('Updated or inserted scene');
       }, function(res) {});
@@ -185,6 +185,11 @@
         vm.scene.combatants.splice(index, 1);
         vm.selected = null;
       });
+    }
+
+    function newCombatant() {
+      vm.scene.combatants.push({ initiative: 0 });
+      vm.activeCombatant = vm.scene.combatants[vm.scene.combatants.length - 1];
     }
 
     function confirmDelete(obj, callback) {
