@@ -188,8 +188,10 @@
     }
 
     function newCombatant() {
-      vm.scene.combatants.push({ initiative: 0 });
-      vm.activeCombatant = vm.scene.combatants[vm.scene.combatants.length - 1];
+      if(!!vm.scene && !!vm.scene.combatants) {
+        vm.scene.combatants.push({ initiative: 0 });
+        vm.activeCombatant = vm.scene.combatants[vm.scene.combatants.length - 1];
+      }
     }
 
     function confirmDelete(obj, callback) {
