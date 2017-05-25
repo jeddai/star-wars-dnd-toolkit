@@ -32,7 +32,7 @@
     vm.updateScene = updateScene;
     vm.destroyScene = destroyScene;
     vm.destroyCombatant = destroyCombatant;
-    vm.newCombatant = newCombatant();
+    vm.newCombatant = newCombatant;
 
     getPlanets();
     getScenes();
@@ -188,7 +188,7 @@
     }
 
     function newCombatant() {
-      if(!!vm.scene) {
+      if(!!vm.scene && !!vm.scene.combatants) {
         vm.scene.combatants.push({ initiative: 0 });
         vm.activeCombatant = vm.scene.combatants[vm.scene.combatants.length - 1];
       }
