@@ -188,7 +188,7 @@
     }
 
     function newCombatant() {
-      if(!!vm.scene && !!vm.scene.combatants) {
+      if(!!vm.scene) {
         vm.scene.combatants.push({ initiative: 0 });
         vm.activeCombatant = vm.scene.combatants[vm.scene.combatants.length - 1];
       }
