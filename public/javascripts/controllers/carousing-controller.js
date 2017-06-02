@@ -28,12 +28,32 @@
           result = result.replaceAll("&" + i, arr[i - 1]);
         }
       }
+      if(result.search("~") !== -1) {
+        var die = result.match(/~(.*?)~/);
+        var numberOfDice = parseInt(die[1].match(/^(.*?)d/)[1]);
+        var maxNumber = parseInt(die[1].match(/d(.*)/)[1]);
+        result = result.replace(/~(.*?)~/, rollDice(numberOfDice, maxNumber));
+      }
       return {
         "result":result,
-        "resultNumber":randomNumber,
+        "resultNumber": randomNumber + 1,
         "maxNumber": CarousingRolls[vm.numPlayers].length,
         "timestamp": new Date()
       };
+    }
+
+    function rollDice(dice, number) {
+      var total = 0;
+      if(dice <= 10) {
+        for(var i = 0; i < dice; i++) {
+          total += Math.floor((Math.random() * number) + 1);
+        }
+      }
+      else {
+        total = Math.floor((Math.random() * number) + 1);
+        total *= dice;
+      }
+      return total;
     }
 
     function updatePlayers() {

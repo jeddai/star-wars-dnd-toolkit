@@ -24,10 +24,12 @@
                     md-input-container(ng-if="carousing.numPlayers > 3")
                         label Player 4 Name
                         input(ng-model="carousing.players[3]")
+                md-button.md-raised(ng-click="carousing.res = []") Clear Results
     md-list.flex
-        md-list-item.md-2-line(ng-repeat="res in carousing.res | orderBy:'-timestamp' | limitTo: 10")
+        md-list-item.md-3-line(ng-repeat="res in carousing.res | orderBy:'-timestamp' | limitTo: 10")
             .md-list-item-text.black-text
                 h3 Result {{ carousing.res.length - $index }}
+                h4 Possibility {{ res.resultNumber }} of {{ res.maxNumber }}
                 p {{ res.result }}
             md-divider(ng-if="!$last")
     small.flex-grow.text-center Thanks to /u/Bellociraptor and /u/pbghin for creating the&nbsp;
