@@ -4,7 +4,8 @@
 
   angular.module('star-wars')
   .constant('CarousingRolls', {
-    "1": ["You wake up in jail, pending charges for a serious crime (Treason, sedition, grand larceny, etc.). You actually did it.",
+    "1": [
+      "You wake up in jail, pending charges for a serious crime (Treason, sedition, grand larceny, etc.). You actually did it.",
       "You wake up in jail, pending charges for a serious crime (Treason, sedition, grand larceny, etc.). You didn’t do it.",
       "You wake up in jail on minor charges. Pay 10gp for bail or spend 1d4(~1d4~) days behind bars.",
       "You wake up in jail on minor charges. Pay 10gp for bail or spend 1d4(~1d4~) days behind bars. Also, your cellmate is an NPC you previously made enemies with.",
@@ -124,16 +125,18 @@
       "You make a small fortune gambling. You recuperate your lifestyle expenses for the time spent carousing and gain 4d6(~4d6~) × 10 gp. Your carousing becomes the stuff of local legend."
     ],
     "2": [
-      "&1 and &2 wake up together in bed, each wearing wedding rings.",
+      "&1 and &2 wake up together in bed, wearing wedding rings. In addition, you find a marriage certificate with your names on it. &1 has taken &2's last name.",
+      "&1 and &2 wake up together in bed. {Math.random() > 0.5 ? 'Wearing each other\\'s clothes.' : 'Naked.'}",
+      "&1 and &2 wake up together, handcuffed to each other. {Math.random() > 0.5 ? 'You cannot find a key.' : 'After searching, you found a key.'}",
       "In his/her drunken stupor, and after &2 passed out, &1 took all of &2's clothes and hid them around the ship/bar/current location.",
-      "&1 and &2 have all drunkenly accepted a cargo mission for your group from the following faction: Roll 1d6(~1d6~) – 1 = Sith, 2 = Black Sun, 3 = Mandalorians, 4 = Chiss, 5 = Jedi, 6 = Republic"
+      "&1 and &2 have drunkenly accepted a cargo mission for your group from the {return new Array('Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic')[Math.floor((Math.random() * 6))]}."
     ],
     "3": [
-      "&1, &2, and &3 have all drunkenly accepted a cargo mission for your group from the following faction: Roll 1d6(~1d6~) – 1 = Sith, 2 = Black Sun, 3 = Mandalorians, 4 = Chiss, 5 = Jedi, 6 = Republic"
+      "&1, &2, and &3 have all drunkenly accepted a cargo mission for your group from the {return new Array('Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic')[Math.floor((Math.random() * 6))]}."
     ],
     "4": [
-      "&1, &2, and &3 have all drunkenly placed a 1d10 × 90(~90d10~)cr bounty on &4's head, to be brought to them, roll a d6, alive if even, dead if odd.",
-      "&1, &2, &3, and &4 have all drunkenly accepted a cargo mission for your group from the following faction: Roll 1d6(~1d6~) – 1 = Sith, 2 = Black Sun, 3 = Mandalorians, 4 = Chiss, 5 = Jedi, 6 = Republic"
+      "&1, &2, and &3 have all drunkenly placed a 1d10 × 90(~90d10~)cr bounty on &4's head, to be brought to them. {Math.random() > 0.5 ? 'Alive' : 'Dead'}.",
+      "&1, &2, &3, and &4 have all drunkenly accepted a cargo mission for your group from the {return new Array('Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic')[Math.floor((Math.random() * 6))]}."
     ]
   });
 

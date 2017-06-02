@@ -20,15 +20,29 @@
     }
 
     function getCarousingResult() {
+      var i = 0;
       var randomNumber = Math.floor((Math.random() * CarousingRolls[vm.numPlayers].length));
       var result = CarousingRolls[vm.numPlayers][randomNumber];
       if(vm.numPlayers !== 1) {
         var arr = shuffle(angular.copy(vm.players));
-        for(var i = 1; i <= vm.numPlayers; i++) {
+        for(i = 1; i <= vm.numPlayers; i++) {
           result = result.replaceAll("&" + i, arr[i - 1]);
         }
       }
-      if(result.search("~") !== -1) {
+      if(result.search("{") !== -1) {
+        var matches = result.match(/{[^}]*}/);
+        for(i = 0; i < matches.length; i++) {
+          var val = matches[i].substr(1,matches[i].length-2);
+          if(val.search("return") !== -1) {
+            var func = new Function(val);
+            result = result.replace(matches[i], func());
+          }
+          else {
+            result = result.replace(matches[i], eval(val));
+          }
+        }
+      }
+      else if(result.search("~") !== -1) {
         var die = result.match(/~(.*?)~/);
         var numberOfDice = parseInt(die[1].match(/^(.*?)d/)[1]);
         var maxNumber = parseInt(die[1].match(/d(.*)/)[1]);
@@ -50,8 +64,7 @@
         }
       }
       else {
-        total = Math.floor((Math.random() * number) + 1);
-        total *= dice;
+        total = Math.floor(((Math.random() * number) + 1) * dice);
       }
       return total;
     }
