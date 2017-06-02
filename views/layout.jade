@@ -35,14 +35,15 @@ html
         //script(src='/javascripts/helpers/pdf.worker.js')
 
         script(src='/javascripts/star-wars.js')
+        script(src='/javascripts/helpers/constants.js')
         script(src='/javascripts/star-wars-routes.js')
         script(src='/javascripts/services/auth-service.js')
         script(src='/javascripts/controllers/nav-controller.js')
-        script(src='/javascripts/controllers/index-controller.js')
         script(src='/javascripts/controllers/map-controller.js')
         script(src='/javascripts/controllers/phb-controller.js')
         script(src='/javascripts/controllers/settings-controller.js')
         script(src='/javascripts/controllers/login-controller.js')
+        script(src='/javascripts/controllers/carousing-controller.js')
     body(ng-app='star-wars' ng-controller="NavController as nav")
         md-toolbar.hide-gt-md
             .md-toolbar-tools
@@ -58,6 +59,9 @@ html
                             md-list-item.secondary-button-padding(ng-click="nav.go('PHB')")
                                 p Player's Supplement
                                 i.fa.fa-rebel
+                            md-list-item.secondary-button-padding(ng-click="nav.go('Carousing')")
+                                p Carousing
+                                i.fa.fa-beer
                             md-list-item.secondary-button-padding(ng-click="nav.go('Map')")
                                 p Map
                                 i.fa.fa-map

@@ -1,0 +1,35 @@
+.layout-row.layout-wrap.flex
+    .flex-20.flex-nogrow.flex-noshrink
+        md-card
+            md-card-title
+                md-card-title-text Carousing Settings
+            md-card-content
+                md-input-container
+                    md-select(ng-model='carousing.numPlayers' aria-label="Number of Players" placeholder="Number of Players" ng-change="carousing.updatePlayers()")
+                        md-option(value="1") One Player
+                        md-option(value="2") Two Players
+                        md-option(value="3") Three Players
+                        md-option(value="4") Four Players
+                md-button.md-primary.md-raised(ng-click="carousing.roll()") Go Carousing!
+                .layout-column
+                    md-input-container(ng-if="carousing.numPlayers > 1")
+                        label Player 1 Name
+                        input(ng-model="carousing.players[0]")
+                    md-input-container(ng-if="carousing.numPlayers > 1")
+                        label Player 2 Name
+                        input(ng-model="carousing.players[1]")
+                    md-input-container(ng-if="carousing.numPlayers > 2")
+                        label Player 3 Name
+                        input(ng-model="carousing.players[2]")
+                    md-input-container(ng-if="carousing.numPlayers > 3")
+                        label Player 4 Name
+                        input(ng-model="carousing.players[3]")
+    md-list.flex
+        md-list-item.md-2-line(ng-repeat="res in carousing.res | orderBy:'-timestamp' | limitTo: 10")
+            .md-list-item-text.black-text
+                h3 Result {{ carousing.res.length - $index }}
+                p {{ res.result }}
+            md-divider(ng-if="!$last")
+    small.flex-grow.text-center Thanks to /u/Bellociraptor and /u/pbghin for creating the&nbsp;
+        a(href="https://www.reddit.com/r/DnD/comments/3uunbt/the_bigger_badder_longer_uncut_d100_carousing/") d100 carousing table
+        | &nbsp;I used for the one player results!

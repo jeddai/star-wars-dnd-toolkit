@@ -5,13 +5,6 @@
   angular.module('star-wars')
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
-      name: 'Index',
-      templateUrl: '/partials/index',
-      controller: 'IndexController',
-      controllerAs: 'index',
-      url: '/'
-    })
-    .state({
       name: 'Map',
       templateUrl: '/partials/map',
       controller: 'MapController',
@@ -51,6 +44,13 @@
       controller: 'LoginController',
       controllerAs: 'login',
       url: '/login'
+    })
+    .state({
+      name: 'Carousing',
+      templateUrl: '/partials/carousing',
+      controller: 'CarousingController',
+      controllerAs: 'carousing',
+      url: '/carousing'
     });
 
     $urlRouterProvider.otherwise('/phb');

@@ -25,8 +25,12 @@ div>h2,
 div>h3,
 div>h4,
 div>h5 {
-  color: #e00;
+  color: #e00 !important;
   text-shadow: 0.5px 0.5px #b00;
+}
+
+.black-text>p {
+  color: #000 !important;
 }
 
 .links line {
@@ -62,6 +66,10 @@ a.no-highlight {
 
 .text-center {
   text-align: center;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .scroll {
