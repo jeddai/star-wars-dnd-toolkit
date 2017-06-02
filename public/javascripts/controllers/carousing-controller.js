@@ -42,7 +42,7 @@
           }
         }
       }
-      else if(result.search("~") !== -1) {
+      if(result.search("~") !== -1) {
         var die = result.match(/~(.*?)~/);
         var numberOfDice = parseInt(die[1].match(/^(.*?)d/)[1]);
         var maxNumber = parseInt(die[1].match(/d(.*)/)[1]);
