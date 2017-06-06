@@ -53,7 +53,7 @@
                     md-icon.md-primary(ng-if="settings.activeCombatant === $index") bookmark
                     md-icon.md-secondary(ng-click="settings.selected = combatant" aria-label="edit") build
                     md-icon.md-secondary(ng-click="settings.destroyCombatant(combatant)" aria-label="destroy") clear
-.flex.flex-gt-sm-70(ng-if="!!settings.scene && !!settings.selected")
+.flex(ng-if="!!settings.scene && !!settings.selected")
     md-card
         md-card-title
             md-card-title-text

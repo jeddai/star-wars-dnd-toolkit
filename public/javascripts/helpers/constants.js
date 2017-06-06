@@ -132,7 +132,9 @@
       "&1 and &2 have drunkenly accepted a cargo mission for your group from the {['Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic'][random(6)]}."
     ],
     "3": [
-      "&1, &2, and &3 have all drunkenly accepted a cargo mission for your group from the {['Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic'][random(6)]}."
+      "&1, &2, and &3 wake up together in bed. &1 is {['littlest','biggest'][random(2)]} spoon.",
+      "&1, &2, and &3 have all drunkenly accepted a cargo mission for your group from the {['Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic'][random(6)]}.",
+      "After &1 passed out, &2 and &3 took all of his/her belongings and hid them {['in the ship somewhere','in the nearest Rehal\\'s Cantina'][random(2)]}."
     ],
     "4": [
       "&1, &2, and &3 have all drunkenly placed a 1d10 × 90(~90d10~)cr bounty on &4's head, to be brought to them. {['Alive', 'Dead'][random(2)]}.",

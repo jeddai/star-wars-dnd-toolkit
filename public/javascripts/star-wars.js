@@ -7,10 +7,6 @@ function random(number) {
   return Math.floor(Math.random() * number);
 }
 
-function randomChance(chance) {
-  return Math.random() < chance;
-}
-
 (function() {
   angular.module('star-wars', ['ngMaterial', 'ngAria', 'ngAnimate', 'ui.router'])
   .config(function($mdThemingProvider, $compileProvider, $mdIconProvider){
