@@ -11,6 +11,9 @@
                         md-option(value="3") Three Players
                         md-option(value="4") Four Players
                 md-button.md-primary.md-raised(ng-click="carousing.roll()") Go Carousing!
+                md-input-container
+                    label Specific Result
+                    input(ng-model="carousing.specResult" type="number")
                 .layout-column
                     md-input-container(ng-if="carousing.numPlayers > 1")
                         label Player 1 Name
@@ -26,7 +29,7 @@
                         input(ng-model="carousing.players[3]")
                 md-button.md-raised(ng-click="carousing.res = []") Clear Results
     md-list.flex
-        md-list-item.md-3-line(ng-repeat="res in carousing.res | orderBy:'-timestamp' | limitTo: 10")
+        md-list-item.md-3-line(ng-repeat="res in carousing.res | orderBy:'-timestamp' | limitTo: carousing.limit")
             .md-list-item-text.black-text
                 h3 Result {{ carousing.res.length - $index }}
                 h4 Possibility {{ res.resultNumber }} of {{ res.maxNumber }}

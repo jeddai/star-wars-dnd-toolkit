@@ -14,6 +14,11 @@
     vm.numPlayers = 1;
     vm.players = ["Player 1"];
     vm.res = [];
+    vm.specResult = '';
+
+    if($(window).height() < 920) {
+      vm.limit = 5;
+    } else vm.limit = 10;
 
     function roll() {
       vm.res.push(getCarousingResult());
@@ -21,7 +26,13 @@
 
     function getCarousingResult() {
       var i = 0;
-      var randomNumber = Math.floor((Math.random() * CarousingRolls[vm.numPlayers].length));
+      var randomNumber;
+      if(vm.specResult) {
+        randomNumber = vm.specResult - 1;
+      } else {
+        randomNumber = Math.floor(
+            (Math.random() * CarousingRolls[vm.numPlayers].length));
+      }
       var result = CarousingRolls[vm.numPlayers][randomNumber];
       if(vm.numPlayers !== 1) {
         var arr = shuffle(angular.copy(vm.players));
@@ -30,7 +41,7 @@
         }
       }
       if(result.search("{") !== -1) {
-        var matches = result.match(/{[^}]*}/);
+        var matches = result.match(/{[^}]*}/g);
         for(i = 0; i < matches.length; i++) {
           var val = matches[i].substr(1,matches[i].length-2);
           if(val.search("return") !== -1) {
