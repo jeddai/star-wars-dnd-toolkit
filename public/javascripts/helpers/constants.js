@@ -127,8 +127,8 @@
     "2": [
       "&1 and &2 wake up together in bed, wearing wedding rings. In addition, you find a marriage certificate with your names on it. &1 has taken &2's last name.",
       "&1 and &2 wake up together in bed. {['Wearing each other\\'s clothes.', 'Naked.'][random(2)]}",
-      "&1 and &2 wake up together {['in a hotel room you have never seen before','on your ship','in a booth in Rehal\\'s cantina'][random(3)]}, handcuffed to each other. {['You cannot find a key.', 'After searching, you can find a key.'][random(2)]}",
-      "In his/her drunken stupor, and after &2 passed out, &1 took all of &2's clothes and hid them around the ship/bar/current location.",
+      "&1 and &2 wake up together {['in a hotel room you have never seen before','on their ship','in a booth in Rehal\\'s cantina'][random(3)]}, handcuffed to each other. {['You cannot find a key.', 'After searching, you can find a key.'][random(2)]}",
+      "In his/her drunken stupor, and after &2 passed out, &1 took all of &2's clothes and hid them {['in the ship somewhere','in the nearest Rehal\\'s Cantina'][random(2)]}.",
       "&1 and &2 have drunkenly accepted a cargo mission for your group from the {['Sith','Black Sun','Mandalorians','Chiss','Jedi','Republic'][random(6)]}."
     ],
     "3": [
